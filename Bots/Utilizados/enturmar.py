@@ -31,14 +31,14 @@ loginUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((B
 loginUsuario.send_keys('jaqueline.floriano@dnx.tec.br')
 
 senhaUsuario = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,'/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/div[1]/sso-mat-password-input/mat-form-field/div/div[1]/div[2]/input')))
-senhaUsuario.send_keys('04031996Jf@') 
+senhaUsuario.send_keys('Maple@0405') 
 
 entrarUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/lex-button/button')))   
 entrarUsuario.click() 
 
 TIMEOUT_HOMEPAGE = 31
 
-time.sleep(5)
+time.sleep(10)
 
 complementarCadastro = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[2]/div[2]/div/mat-dialog-container/sso-registration-complement-dialog/div/div[2]/lex-button[2]/button')))
 complementarCadastro.click()
@@ -61,19 +61,21 @@ deuErro = []
 errosEscolas =[]
 naoEnturmados = []
 enturmados = []
-indices = [11, 22, 28, 148, 50, 67, 106, 153, 52, 164, 94, 187, 202, 226, 247]
+indices = [16]
 
 
 
 if elementos_filtrados:
     
     for indice in indices:#range(5,len(elementos_filtrados)):
-        time.sleep(1)
+        time.sleep(3)
         
     #for indice in range(6):
         
         titulo_elemento = elementos_filtrados[indice].find_element(By.CSS_SELECTOR, "h3")
         nomeEscola = titulo_elemento.text
+
+        time.sleep(3)
        
         try:
             try:
@@ -90,13 +92,17 @@ if elementos_filtrados:
             cadAdministrador = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '/html/body/sso-root/lex-user-portal-page/lex-backdrop/div/div/main/section[2]/lex-card/div/a[1]/div')))
             cadAdministrador.click()
 
+            time.sleep(3)
+
             aba_atual = driver.window_handles[-1]
-            driver.switch_to.window(aba_atual)     
+            driver.switch_to.window(aba_atual) 
+            
+            time.sleep(3)  
 
             menuTurmas = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.presence_of_element_located((By.XPATH, "/html/body/seb-root/div[3]/nav/div/ul/li[3]/a"))) 
             menuTurmas.click()
 
-            time.sleep(1)
+            time.sleep(3)
             
             UnidadesEscolher = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until( EC.presence_of_element_located((By.XPATH, "/html/body/seb-root/div[3]/div/seb-class/seb-table-class/div/div/seb-table-filtro-class/form/div/div[1]/ng-select/div/div/div[2]/input")))
             UnidadesEscolher.click()
@@ -112,40 +118,45 @@ if elementos_filtrados:
                         print(f"Escola {nomeEscola} com apenas uma unidade ou sem unidades disponíveis.")
                         
             codigoTurma = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.element_to_be_clickable((By.XPATH, "/html/body/seb-root/div[3]/div/seb-class/seb-table-class/div/div/seb-table-filtro-class/form/div/div[2]/input")))
-            codigoTurma.send_keys("SUPORTE2025")
+            codigoTurma.send_keys("SUPORTE2026")
             
             filtrarCodigo = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.element_to_be_clickable((By.XPATH, "/html/body/seb-root/div[3]/div/seb-class/seb-table-class/div/div/seb-table-filtro-class/form/div/div[7]/button")))
             filtrarCodigo.click()
             
             time.sleep(2)
             
-            turmaExiste = driver.find_elements(By.XPATH, "//span[@class='table-text' and text()='SUPORTE LEX 2025']")
-            time.sleep(2)
+            turmaExiste = driver.find_elements(By.XPATH, "//span[@class='table-text' and @title='SUPORTE LEX 2026' and text()='SUPORTE LEX 2026']"
+            )
+            time.sleep(4)
             
             if turmaExiste:
                 print("Turma já existe na Escola:", nomeEscola)
-                time.sleep(1)
+                time.sleep(4)
                 clicarTurma = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "body > seb-root > div.page-wrapper > div > seb-class > seb-table-class > div > div > seb-lex-table > div.lex-table.mt-2 > div.lex-table-content > div")))
                 clicarTurma.click()
                 
-                time.sleep(1)
+                time.sleep(4)
                 
-                timeLexToddle = [ "joao.freitas@mbcentral.com.br"] 
+                timeLexToddle = ["jaqueline.floriano@dnx.tec.br", "jessika.queiroz@dnx.tec.br", "gabriela.santos@dnx.tec.br", "fernanda.inacio@dnx.tec.br", "julioc.santos@maplebear.com.br", "leticia.oliveira@dnx.tec.br", "yasmin.martins@maplebear.com.br", "toddle@maplebear.com.br"] 
                         # timeLexToddle = ["jaqueline.floriano@dnx.tec.br", "fernanda.vieira@dnx.tec.br"] 
+
+                time.sleep(4)
                 
                 for pessoa in timeLexToddle:
                     
                     try:
                         
                         if pessoa:
-                            time.sleep(2)
+                            time.sleep(4)
                             inserirUsuariosTurma = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-edit-class/form/div[2]/div[7]/div[2]/div[1]/ng-select/div/div/div[2]/input')))
                             inserirUsuariosTurma.click()
                             inserirUsuariosTurma.send_keys(pessoa)
+                            time.sleep(2)
                             inserirUsuariosTurma.send_keys(Keys.ENTER)
+                            time.sleep(2)
                             inserirUsuariosTurma.send_keys(Keys.ENTER)
                             
-                            time.sleep(1)
+                            time.sleep(4)
                             
                             selecionarPerfil = WebDriverWait(driver, TIMEOUT_HOMEPAGE).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-edit-class/form/div[2]/div[7]/div[2]/div[2]/ng-select/div/div/div[2]/input')))
                             selecionarPerfil.click()

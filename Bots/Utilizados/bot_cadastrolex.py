@@ -21,7 +21,7 @@ loginUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((B
 loginUsuario.send_keys('jaqueline.floriano@dnx.tec.br')
 
 senhaUsuario = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,'/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/div[1]/sso-mat-password-input/mat-form-field/div/div[1]/div[2]/input')))
-senhaUsuario.send_keys('04031996Jf@') 
+senhaUsuario.send_keys('Maple@0405') 
 
 entrarUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/lex-button/button')))   
 entrarUsuario.click() 
@@ -45,7 +45,7 @@ for elemento in elementos_div:
     if "maple bear" in texto_titulo.lower():
         elementos_filtrados.append(elemento)
 
-indices = [230, 242, 243, 244, 245, 246, 247, 248, 250, 252]
+indices = [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110]
 naoCadastrados = []
 errosEscolas = []
 
@@ -67,17 +67,19 @@ if elementos_filtrados:
             time.sleep(5) #otimizar
             cadAdministrador = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '/html/body/sso-root/lex-user-portal-page/lex-backdrop/div/div/main/section[2]/lex-card/div/a[1]/div')))
             cadAdministrador.click()
+            time.sleep(4)
 
             aba_atual = driver.window_handles[-1]
-            driver.switch_to.window(aba_atual)                   
+            driver.switch_to.window(aba_atual)  
+            time.sleep(5)                 
 
             menuUsuarios = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/usuarios']")))
             menuUsuarios.click()
 
             filtrarNome = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-usuario/div/seb-list-table-usuario/div/seb-list-filter-user/form/div[1]/div[1]/input')))
-            filtrarNome.send_keys('41431091820')  #Adicionar CPF do Usuário sem pontos
+            filtrarNome.send_keys('42836701897')  #Adicionar CPF do Usuário sem pontos
             filtrarNome.send_keys(Keys.ENTER)
-            time.sleep(0.5)
+            time.sleep(2)
             filtrarNome.send_keys(Keys.ENTER)
             
             nenhum_registro = False
@@ -95,24 +97,24 @@ if elementos_filtrados:
             if(nenhum_registro):
                 novoUsuario = WebDriverWait(driver,3).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-usuario/seb-titlebar/div/div/div[2]/div/lex-button/button/span')))
                 novoUsuario.click()       
-                
+                time.sleep(2)
                 nomeCompleto = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/div/div[1]/div[2]/input')))
-                nomeCompleto.send_keys("João Felipe Gutierrez de Freitas") #Adicionar nome do usuário a ser cadastrado
-                
+                nomeCompleto.send_keys("Jamille Marques da Silva") #Adicionar nome do usuário a ser cadastrado
+                time.sleep(2)
                 dataNascimento = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/div/div[1]/div[3]/div/seb-datepicker/form/div/input')))
-                dataNascimento.send_keys("27/01/1992") #Adicionar a data de nascimento
-                
+                dataNascimento.send_keys("29/03/1995") #Adicionar a data de nascimento
+                time.sleep(2)
                 cpfNumero = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/div/div[2]/div[1]/input')))
-                cpfNumero.send_keys("41431091820") #Adicionar CPF do Usuário sem pontos
-                
+                cpfNumero.send_keys("42836701897") #Adicionar CPF do Usuário sem pontos
+                time.sleep(2)
                 #celularNumero = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/div/div[2]/div[3]/intl-input/div/div/input')))
                 #celularNumero.send_keys("12981856171")
                 
                 emailText = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/div/div[3]/div[1]/input')))
-                emailText.send_keys('joao.freitas@mbcentral.com.br') #Adicionar o E-mail
-                
-                perfilAdicionar = ("Admin Escola", "Coordenador","Secretaria", "Gestor", "Operador Financeiro")  #Os perfis que vocês quiserem adicionar, precisa digitar aqui exatamente como é na LEX
-
+                emailText.send_keys('jamille.silva@mbcentral.com.br') #Adicionar o E-mail
+                time.sleep(2)
+                perfilAdicionar = ["Admin Escola", "Coordenador"]  #Os perfis que vocês quiserem adicionar, precisa digitar aqui exatamente como é na LEX
+                time.sleep(2)
                 # perfilSelecionar = WebDriverWait(driver,2).until(EC.element_to_be_clickable((By.XPATH, '/html/body/seb-root/div[3]/div/seb-new-user/div/form/section[1]/div[2]/div[1]/ng-select/div/div/div[2]/input')))
                 # perfilSelecionar.send_keys("Admin Operação")
                 # perfilSelecionar.send_keys(Keys.ENTER)
@@ -130,6 +132,7 @@ if elementos_filtrados:
                     criarPerfil.click()
                     
                     perfilSelecionar.send_keys(Keys.CONTROL, "A")
+                    perfilSelecionar.send_keys(Keys.DELETE)
                 
                 salvarCadastro = WebDriverWait(driver,2).until(EC.presence_of_element_located((By.XPATH, "/html/body/seb-root/div[3]/div/seb-new-user/div/section[2]/div/seb-buttons-form-completion/div/button[2]")))
                 salvarCadastro.click()

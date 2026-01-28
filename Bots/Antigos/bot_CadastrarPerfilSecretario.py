@@ -24,7 +24,7 @@ loginUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((B
 loginUsuario.send_keys('jaqueline.floriano@dnx.tec.br')
 
 senhaUsuario = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,'/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/div[1]/sso-mat-password-input/mat-form-field/div/div[1]/div[2]/input')))
-senhaUsuario.send_keys('04031996Jf@') 
+senhaUsuario.send_keys('Maple@0405') 
 
 entrarUsuario = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/sso-root/lex-login-page/sso-login-layout/div/div[2]/form/lex-button/button')))   
 entrarUsuario.click() 
@@ -52,7 +52,7 @@ adicionadoCord =[]
 naoCadastrados = []
 errosEscolas = []
 
-indices =  [72, 147, 151, 182, 185, 186, 221, 222, 232, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252]
+indices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 if elementos_filtrados:
     
@@ -83,7 +83,7 @@ if elementos_filtrados:
             aba_atual = driver.window_handles[-1]
             driver.switch_to.window(aba_atual)                   
 
-            time.sleep(1)
+            time.sleep(5)
 
             try:
                 # Wait for the element to be clickable
@@ -96,9 +96,9 @@ if elementos_filtrados:
                 menuUsuarios.click()
 
             filtrarNome = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/seb-root/div[3]/div/seb-usuario/div/seb-list-table-usuario/div/seb-list-filter-user/form/div[1]/div[1]/input')))
-            filtrarNome.send_keys('45078124888')
+            filtrarNome.send_keys('40997778806')
             filtrarNome.send_keys(Keys.ENTER)
-            time.sleep(0.5)
+            time.sleep(4)
             filtrarNome.send_keys(Keys.ENTER)
             
             textoNenhumRegistro = False # inicializacao (pode er qualquer coisa)
@@ -120,6 +120,7 @@ if elementos_filtrados:
                 entrarCadastro = WebDriverWait(driver,5).until(EC.presence_of_element_located((By.XPATH, "/html/body/seb-root/div[3]/div/seb-usuario/div/seb-list-table-usuario/div/seb-lex-table/div[2]/div[2]/div/div[6]/div/span")))
                 entrarCadastro.click()
                 
+                
                 SecretarioAdicionado = False
                 
                 try:
@@ -131,15 +132,15 @@ if elementos_filtrados:
                 except TimeoutException:
                     CoordenadorAdicionado = False
                 
-                if CoordenadorAdicionado == False:
+                if CoordenadorAdicionado == True:
                     
                     time.sleep(10)
                     
                     colocarPerfilSecretario = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH, '/html/body/seb-root/div[3]/div/seb-edit-user/form/div[2]/section[2]/div[2]/div[1]/ng-select/div/div/div[2]/input')))
-                    colocarPerfilSecretario.send_keys("Se")
+                    colocarPerfilSecretario.send_keys("Secretaria")
                     colocarPerfilSecretario.send_keys(Keys.ENTER)
                     
-                    time.sleep(5)
+                    #time.sleep(5)
 
                     #selecionarPerfilCoordenador = WebDriverWait(driver,5).until(EC.element_to_be_clickable((By.XPATH, '/html/body/seb-root/div[3]/div/seb-edit-user/form/div[2]/section[2]/div[2]/div[1]/ng-select/ng-dropdown-panel/div/div[2]/div[14]')))
                     
